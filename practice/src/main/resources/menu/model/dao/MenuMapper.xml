@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="menu.model.dao.MenuMapper">
+
+    <select id="selectOneMenuByname" resultType="menu.model.dto.MenuDTO">
+        SELECT
+            menu_code,
+            menu_name,
+            menu_price
+        FROM
+            tbl_menu
+        WHERE
+             menu_name = #{ menuName }
+    </select>
+
+    <select id="selectAllMenu" resultType="menu.model.dto.MenuDTO">
+        SELECT
+            menu_code,
+            menu_name,
+            menu_price
+        FROM
+            tbl_menu
+    </select>
+
+    <insert id="insertMenu">
+        INSERT
+        INTO
+        tbl_menu
+        (
+        orderable_status,
+        category_code,
+        menu_code,
+        menu_name,
+        menu_price
+        )
+        VALUES
+        (
+        ?,
+        4,
+        #{ menuCode },
+        #{ menuName },
+        #{ menuPrice }
+
+        )
+    </insert>
+    <update id="updateMenu">
+        UPDATE
+        tbl_menu
+        SET
+        menu_name = #{ menuName }
+        WHERE
+        menu_code = #{ menuCode },
+        menu_price = #{ menuPrice }
+    </update>
+
+    <delete id="deleteMenu">
+        DELETE
+        FROM
+        tbl_menu
+        WHERE
+        menu_name = #{ menuName }
+    </delete>
+</mapper>
